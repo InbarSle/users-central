@@ -5,7 +5,7 @@
 
 import { Logger, ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
-
+import {config} from './assets/environment';
 import { AppModule } from './app/app.module';
 
 async function bootstrap() {
@@ -14,9 +14,9 @@ async function bootstrap() {
   app.useGlobalPipes(new ValidationPipe({ transform: true, whitelist: true }));
   app.setGlobalPrefix(globalPrefix);
   app.enableCors({
-    origin: "http://localhost:4200",
+    origin: config.clientPath,
   });
-  const port = process.env.PORT || 3010;
+  const port = process.env.PORT || config.port;
   await app.listen(port);
   Logger.log(`🚀 Application is running on: http://localhost:${port}/${globalPrefix}`);
 }
