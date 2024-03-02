@@ -26,8 +26,8 @@ export class UserService {
 
     async updateUser(id: string, updateUserDto: UpdateUserDto): Promise<IUser> {
         try {
-            this.logger.log(updateUserDto, 'Update new user');
-            const updatedUser = await this.userModel.findByIdAndUpdate(id, updateUserDto);
+            this.logger.log( JSON.stringify(updateUserDto, null, 2), 'Update new user');
+            const updatedUser = await this.userModel.findByIdAndUpdate(id, updateUserDto, {new: true});
             return this.sanitizeUser(updatedUser);
         } catch (e) {
             this.logger.error(e);
@@ -68,7 +68,7 @@ export class UserService {
                 address: user.address,
                 location: {
                     lat: user.location.lat,
-                    long: user.location.lat
+                    long: user.location.long
                 }
             }
         }

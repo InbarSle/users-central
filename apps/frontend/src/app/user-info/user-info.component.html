@@ -22,7 +22,7 @@
     </div>
     <div class="row my-3 map-container">
         <div class="col">
-            <users-central-map (onMarkerSet)="updateLocation($event)"></users-central-map>
+            <users-central-map [markerLocation]="location" (onMarkerSet)="updateLocation($event)"></users-central-map>
             <small class="text-danger" *ngIf="!location && this.submitted">Location is required</small>
         </div>
     </div>

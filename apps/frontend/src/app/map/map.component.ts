@@ -32,7 +32,7 @@ export class MapComponent implements AfterViewInit{
   @Input()
   set markerLocation(value: MapLocation | undefined) {
     this._markerLocation = value;
-    this.onMyPropertyChange();
+    this.setMarker();
   }
 
   get markerLocation(): MapLocation | undefined {
@@ -43,7 +43,6 @@ export class MapComponent implements AfterViewInit{
 
   private map?: L.Map;
   private marker?: L.Marker;
-
 
   constructor(private ngZone: NgZone) {}
 
@@ -56,22 +55,15 @@ export class MapComponent implements AfterViewInit{
         const {lat, lng: long} = e.latlng
 
         this.markerLocation = {lat, long };
-        this.onMarkerSet?.emit({lat, long });
+        this.onMarkerSet?.emit(this.markerLocation);
       });
     }
   }
-
-
-
 
   updatePropertyManually(newValue: MapLocation): void {
     this.ngZone.run(() => {
       this.markerLocation = newValue;
     });
-  }
-
-  onMyPropertyChange(): void {
-    this.setMarker();
   }
 
   private setMarker() {
@@ -82,6 +74,7 @@ export class MapComponent implements AfterViewInit{
       const {lat, long} = this.markerLocation;
       this.marker = L.marker([lat, long]);
       this.marker.addTo(this.map);
+      this.map.panTo(new L.LatLng(lat, long));
     }
   }
 
