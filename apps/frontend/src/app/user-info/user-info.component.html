@@ -1,0 +1,35 @@
+<form class="container-fluid py-3" [formGroup]="userForm" (ngSubmit)="submit()">
+    <div class="row my-3">
+        <div class="col">
+            <label for="fullname" class="form-label">Name</label>
+            <input id="fullname" formControlName="fullname" type="text" [ngClass]="{'is-invalid': isControlInvalid('fullname')}"  class="form-control form-control-sm" />
+            <small class="text-danger" *ngIf="isControlInvalid('fullname')">Full name is required</small>
+        </div>
+    </div>
+    <div class="row my-3">
+        <div class="col">
+            <label for="email" class="form-label">Email</label>
+            <input id="email" formControlName="email" type="email" [ngClass]="{'is-invalid': isControlInvalid('email')}" class="form-control" />
+            <small class="text-danger" *ngIf="isControlInvalid('email')">Email is required and should be valid</small>
+        </div>
+    </div>
+    <div class="row my-3">
+        <div class="col">
+            <label for="address" class="form-label">Address</label>
+            <input id="address" formControlName="address" type="text" [ngClass]="{'is-invalid': isControlInvalid('address')}"  class="form-control" />
+            <small class="text-danger" *ngIf="isControlInvalid('address')">Address is required</small>
+        </div>
+    </div>
+    <div class="row my-3 map-container">
+        <div class="col">
+            <users-central-map (onMarkerSet)="updateLocation($event)"></users-central-map>
+            <small class="text-danger" *ngIf="!location && this.submitted">Location is required</small>
+        </div>
+    </div>
+    <div class="float-start my-3">
+        <div class="col">
+            <button class="btn btn-primary" type="submit">{{isNewUser? 'Create' : 'Update '}}</button>
+        </div>
+    </div>
+</form>
+

@@ -1,0 +1,11 @@
+<nav class="navbar navbar-expand-sm navbar-light bg-light">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">
+        <h1>Users Central</h1>
+      </a>
+    <div class="nav-item" >
+        <a *ngIf="showButton" [routerLink]="['/user']"class="btn btn-outline-success" >Create</a>
+    </div>
+    </div>
+</nav>
+<router-outlet></router-outlet>

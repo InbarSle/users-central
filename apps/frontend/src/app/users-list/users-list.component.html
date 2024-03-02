@@ -1,0 +1,15 @@
+<div  *ngIf="users$ | async as users; else loading;" class="list-group">
+    <ng-container *ngIf="users.length; else empty">
+        <a *ngFor="let user of users" [routerLink]="['/user', user.id]" class="list-group-item list-group-item-action">{{user.fullname}}</a>
+    </ng-container>
+    <ng-template #empty>
+        <p #loading class="my-4">No Users</p>
+    </ng-template>
+</div>
+
+<ng-template #loading>
+    <p #loading class="my-4">Loading ...</p>
+</ng-template>
+
+
+
