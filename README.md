@@ -12,7 +12,8 @@ comes with a LSP for Vim users.
 
 ## Setup the application
 
-Run `npm run setup` to setup the workspace
+1. Run `npm run setup` to setup the workspace
+2. Make sure there is a local MongoDB server on localhost:27017
 
 ## Run Backend
 
